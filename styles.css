@@ -1,0 +1,155 @@
+:root {
+  --bg: #0b0f1a;
+  --text: #e5e7eb;
+  --accent: #7c5cff;
+  --accent2: #22d3ee;
+  --accent3: #f472b6;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- 背景飘落 ---------- */
+.rain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.drop {
+  position: absolute;
+  top: -10%;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  animation: fall linear forwards;
+  opacity: 0.85;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* ---------- 主舞台 ---------- */
+.stage {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 20px;
+  text-align: center;
+}
+
+.big {
+  font-size: clamp(3rem, 12vw, 7rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hue 6s linear infinite;
+}
+
+@keyframes hue {
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.sub {
+  color: #9ca3af;
+  margin-top: 12px;
+  font-size: 1.1rem;
+}
+
+.counter-text {
+  margin: 28px 0 8px;
+  color: #cbd5e1;
+}
+
+.counter-text strong {
+  color: var(--accent2);
+  font-size: 1.3em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  margin: 14px 6px 0;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(124, 92, 255, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--accent3);
+  color: var(--accent3);
+}
+
+.btn-ghost:hover {
+  box-shadow: 0 8px 24px rgba(244, 114, 182, 0.35);
+}
+
+/* ---------- 临时生成区 ---------- */
+.field {
+  position: relative;
+  min-height: 200px;
+  margin-top: 20px;
+}
+
+.pop {
+  position: absolute;
+  font-weight: 800;
+  color: #fff;
+  pointer-events: none;
+  animation: pop 1.6s ease-out forwards;
+}
+
+@keyframes pop {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(0.6) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(1.6) rotate(var(--rot));
+  }
+}
